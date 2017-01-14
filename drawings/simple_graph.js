@@ -204,7 +204,7 @@ Drawing.SimpleGraph = function(options) {
         var label_object = new THREE.Label(node.id);
       }
       node.data.label_object = label_object;
-      scene.add( node.data.label_object );
+      draw_object.add( node.data.label_object );
     }
 
     var area = 5000;
@@ -274,10 +274,7 @@ Drawing.SimpleGraph = function(options) {
       for(var i=0; i<length; i++) {
         var node = graph.nodes[i];
         if(node.data.label_object != undefined) {
-          node.data.label_object.position.x = node.data.draw_object.position.x;
-          node.data.label_object.position.y = node.data.draw_object.position.y - 100;
-          node.data.label_object.position.z = node.data.draw_object.position.z;
-          node.data.label_object.lookAt(camera.position);
+          node.data.label_object.position.y = 50;
         } else {
           if(node.data.title != undefined) {
             var label_object = new THREE.Label(node.data.title, node.data.draw_object);
@@ -285,7 +282,7 @@ Drawing.SimpleGraph = function(options) {
             var label_object = new THREE.Label(node.id, node.data.draw_object);
           }
           node.data.label_object = label_object;
-          scene.add( node.data.label_object );
+          node.data.draw_object.add( node.data.label_object );
         }
       }
     } else {
@@ -293,7 +290,7 @@ Drawing.SimpleGraph = function(options) {
       for(var i=0; i<length; i++) {
         var node = graph.nodes[i];
         if(node.data.label_object != undefined) {
-          scene.remove( node.data.label_object );
+          node.data.draw_object.remove( node.data.label_object );
           node.data.label_object = undefined;
         }
       }
